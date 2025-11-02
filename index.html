@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Game Library</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
 </head>
 <body>
 
@@ -14,33 +13,34 @@
     <div id="loading">Loading all 6,000+ games, please wait...</div>
     <div id="galleryContainer"></div>
 
-    <script>
-        // When the page loads, fetch the games.csv file
-        window.addEventListener('DOMContentLoaded', () => {
-            Papa.parse("games.csv", {
-                download: true,
-                header: true, // This line tells the code to read your header names
-                skipEmptyLines: true, // This ignores any blank rows in your file
-                complete: function(results) {
-                    // Hide the loading message
-                    document.getElementById("loading").style.display = "none";
-                    // Build the gallery with the loaded data
-                    buildGallery(results.data);
-                }
-            });
-        });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
 
+    <script>
+        // No "DOMContentLoaded" listener is needed now, as the script is at the end.
+        
+        Papa.parse("games.csv", {
+            download: true,
+            header: true, // This line reads your header names
+            skipEmptyLines: true, // This ignores any blank rows
+            complete: function(results) {
+                // Hide the loading message
+                document.getElementById("loading").style.display = "none";
+                // Build the gallery with the loaded data
+                buildGallery(results.data);
+            }
+        });
+        
         // This function builds the HTML for each game card
         function buildGallery(data) {
             const container = document.getElementById("galleryContainer");
-            let allCardsHTML = ""; // We build one big string for speed
+            let allCardsHTML = ""; 
 
             data.forEach(game => {
-                // This code reads the exact header names you provided
+                // This code reads the exact header names from your CSV
                 const gameName = game.GameName;
                 const posterUrl = game.PosterLink;
 
-                // Make sure the row has a game name before we try to build a card
+                // Make sure the row has a game name
                 if (gameName) {
                     allCardsHTML += `
                         <div class="gameCard">

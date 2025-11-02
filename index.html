@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Game Library</title>
+    <title>PS2 Game Library</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>My Game Library</h1>
+    <h1>PS2 Game Library</h1>
     <input type="text" id="searchInput" onkeyup="filterGames()" placeholder="Search for a game...">
-    <div id="loading">Loading all 6,000+ games, please wait...</div>
+    <div id="loading">Loading Games...</div>
     <div id="galleryContainer"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <script>
         // No "DOMContentLoaded" listener is needed now, as the script is at the end.

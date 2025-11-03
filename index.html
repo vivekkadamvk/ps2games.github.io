@@ -8,19 +8,48 @@
 </head>
 <body>
 
-    <div class="header">
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h3>Deva Tech</h3>
+        </div>
         
-        <img src="https://images.seeklogo.com/logo-png/29/1/playstation-2-logo-png_seeklogo-298960.png" alt="PS2 Logo" class="logo">
+        <ul class="nav-links">
+            <li>
+                <a href="#" class="nav-link active">
+                    PS2
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link disabled" title="Coming Soon">
+                    PS3
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link disabled" title="Coming Soon">
+                    PS4
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link disabled" title="Coming Soon">
+                    PS5
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="main-content">
+
+        <div class="header">
+            <img src="https://images.seeklogo.com/logo-png/29/1/playstation-2-logo-png_seeklogo-298960.png" alt="PS2 Logo" class="logo">
+            <h1>PS2 Game Library</h1>
+        </div>
+
+        <input type="text" id="searchInput" onkeyup="filterGames()" placeholder="Search for a game...">
         
-        <h1>PS2 Game Library</h1>
+        <div id="loading">Loading Games...</div>
+
+        <div id="galleryContainer"></div>
+
     </div>
-
-    <input type="text" id="searchInput" onkeyup="filterGames()" placeholder="Search for a game...">
-    
-    <div id="loading">Loading Games...</div>
-
-    <div id="galleryContainer"></div>
-
     <button onclick="scrollToTop()" id="goToTopBtn" title="Go to top">▲</button>
     
     

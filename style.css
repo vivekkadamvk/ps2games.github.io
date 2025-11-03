@@ -1,17 +1,15 @@
-/* --- NEW: HEADER AND LOGO STYLES --- */
+/* --- HEADER AND LOGO STYLES --- */
 .header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 20px; /* Adds space below the header */
+    padding-bottom: 20px; 
 }
 
 .logo {
-    height: 40px; /* You can change this to make the logo bigger/smaller */
-    margin-right: 15px; /* Adds space between the logo and the title */
+    height: 40px; 
+    margin-right: 15px; 
 }
-/* --- END NEW STYLES --- */
-
 
 /* Basic page setup */
 body {
@@ -23,9 +21,8 @@ body {
 }
 
 h1 {
-    /* text-align: center; This is no longer needed, flexbox handles it */
     color: #ffffff;
-    margin: 0; /* Removes default margins to align better with logo */
+    margin: 0; 
 }
 
 /* Search Bar */
@@ -51,27 +48,30 @@ h1 {
 /* Gallery Grid */
 #galleryContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Individual Game Card */
+/* --- OPTIMIZED Individual Game Card --- */
 .gameCard {
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    /* Removed box-shadow, which is very slow to render 6,000 times */
     overflow: hidden;
     text-align: center;
     padding: 10px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s; /* Removed box-shadow from transition */
+
+    /* NEW: This tells the browser to use the GPU for the hover animation */
+    will-change: transform;
 }
 
 .gameCard:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    /* The hover effect is now much "cheaper" for the browser */
 }
 
 .gameCard img {
@@ -90,6 +90,8 @@ h1 {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+/* --- END OPTIMIZED STYLES --- */
+
 
 /* --- GO TO TOP BUTTON STYLES --- */
 #goToTopBtn {

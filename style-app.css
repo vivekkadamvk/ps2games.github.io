@@ -234,3 +234,13 @@ h1 {
 .sidebar-open .site-footer {
     margin-left: 250px;
 }
+
+/* --- NEW: "No Results" Styles --- */
+.no-results-hidden {
+    display: none; /* Hidden by default */
+}
+#noResults {
+    text-align: center;
+    color: #cccccc;
+    padding: 40px;
+}

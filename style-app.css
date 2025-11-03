@@ -238,7 +238,7 @@ h1 {
 /* --- NEW: "No Results" Styles --- */
 .no-results-hidden {
     display: none; /* Hidden by default */
-}
+} 
 #noResults {
     text-align: center;
     color: #cccccc;

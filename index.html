@@ -8,7 +8,9 @@
 </head>
 <body>
 
-    <nav class="sidebar">
+    <nav id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+        
         <div class="sidebar-header">
             <h3>Deva Tech</h3>
         </div>
@@ -36,7 +38,12 @@
             </li>
         </ul>
     </nav>
-    <div class="main-content">
+    <button class="open-nav-btn" onclick="openNav()">&#9776;</button>
+
+    <div id="overlay" onclick="closeNav()"></div>
+
+
+    <div id="mainContent" class="main-content">
 
         <div class="header">
             <img src="https://images.seeklogo.com/logo-png/29/1/playstation-2-logo-png_seeklogo-298960.png" alt="PS2 Logo" class="logo">
@@ -48,15 +55,29 @@
         <div id="loading">Loading Games...</div>
 
         <div id="galleryContainer"></div>
-
     </div>
+    
     <button onclick="scrollToTop()" id="goToTopBtn" title="Go to top">▲</button>
     
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <script>
-        // --- CSV LOADING LOGIC ---
+        
+        // --- NEW: JAVASCRIPT FOR MODERN SLIDING MENU ---
+        function openNav() {
+            document.getElementById("mySidebar").style.transform = "translateX(0)";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.transform = "translateX(-100%)";
+            document.getElementById("overlay").style.display = "none";
+        }
+        // --- END NEW JAVASCRIPT ---
+
+
+        // --- CSV LOADING LOGIC (Loads "games.csv") ---
         Papa.parse("games.csv", {
             download: true,
             header: true, 

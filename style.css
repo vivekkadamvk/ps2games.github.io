@@ -1,21 +1,29 @@
-/* --- NEW MODERN SIDEBAR STYLES --- */
+/* --- MODERN SIDEBAR STYLES --- */
 .sidebar {
-    height: 100%; /* Full-height */
-    width: 250px; /* Fixed width for the sidebar */
-    position: fixed; /* Stays in one place */
-    z-index: 1000; /* Stays on top of everything */
+    height: 100%; 
+    width: 250px; 
+    position: fixed; 
+    z-index: 1000; 
     top: 0;
     left: 0;
-    background-color: #000033; /* Dark PS2 blue */
+    background-color: #000033; 
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-x: hidden; 
     padding-top: 20px;
     
-    /* HIDDEN BY DEFAULT: Move it off-screen to the left */
+    /* 1. HIDDEN BY DEFAULT: Move it off-screen */
     transform: translateX(-100%); 
     
-    /* This is the slide animation */
-    transition: transform 0.3s ease-in-out; 
+    /* 2. NEW: This is the smooth animation */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+
+    /* 3. NEW: This tells the GPU to get ready */
+    will-change: transform;
+}
+
+/* 4. NEW: This class is added by JS to open the sidebar */
+.sidebar-open .sidebar {
+    transform: translateX(0);
 }
 
 .sidebar-header {
@@ -23,59 +31,18 @@
     color: #ffffff;
     font-size: 1.5rem;
     text-align: left;
-    white-space: nowrap; /* Prevents text wrap during slide */
+    white-space: nowrap;
 }
 
-.nav-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.nav-link {
-    display: block;
-    padding: 10px 15px 10px 32px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    color: #cccccc;
-    transition: 0.3s;
-    white-space: nowrap; 
-}
-
-.nav-link:hover {
-    background-color: #1a1a7c;
-    color: #ffffff;
-}
-
-.nav-link.active {
-    background-color: #3e3eff;
-    color: #ffffff;
-    border-left: 4px solid #ffffff;
-    padding-left: 28px;
-}
-
-.nav-link.disabled {
-    color: #5a5a7b; /* Faded color */
-    cursor: not-allowed;
-    background-color: transparent;
-}
-.nav-link.disabled:hover {
-    background-color: transparent;
-    color: #5a5a7b;
-}
-
-/* The "close" button (×) */
-.sidebar .close-btn {
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    font-size: 36px;
-    color: #ffffff;
-    text-decoration: none;
-}
-.sidebar .close-btn:hover {
-    color: #3e3eff;
-}
+/* (Sidebar links are unchanged) */
+.nav-links { list-style: none; padding: 0; margin: 0; }
+.nav-link { display: block; padding: 10px 15px 10px 32px; text-decoration: none; font-size: 1.2rem; color: #cccccc; transition: 0.3s; white-space: nowrap; }
+.nav-link:hover { background-color: #1a1a7c; color: #ffffff; }
+.nav-link.active { background-color: #3e3eff; color: #ffffff; border-left: 4px solid #ffffff; padding-left: 28px; }
+.nav-link.disabled { color: #5a5a7b; cursor: not-allowed; }
+.nav-link.disabled:hover { background-color: transparent; color: #5a5a7b; }
+.sidebar .close-btn { position: absolute; top: 5px; right: 15px; font-size: 36px; color: #ffffff; text-decoration: none; }
+.sidebar .close-btn:hover { color: #3e3eff; }
 
 /* The "hamburger" menu button (☰) */
 .open-nav-btn {
@@ -83,50 +50,44 @@
     cursor: pointer;
     background-color: transparent;
     color: white;
-    padding: 10px 15px;
+    padding: 0; 
     border: none;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 500; /* Sits below sidebar, above content */
+    margin-bottom: 10px;
     transition: color 0.2s;
 }
 .open-nav-btn:hover {
     color: #3e3eff;
 }
 
-/* The full-screen overlay to dim content */
-#overlay {
-    display: none; /* Hidden by default */
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0,0,0,0.5); /* Semi-transparent black */
-    z-index: 999; /* Below sidebar, above content */
-    cursor: pointer;
-}
 
 /* --- Main Content Area --- */
 .main-content {
     padding: 20px;
-    /* We add padding-top to make room for the hamburger button */
-    padding-top: 60px;
+    padding-top: 60px; /* Make room for hamburger btn */
     
-    /* We add a transition to match the sidebar slide */
-    transition: margin-left 0.3s ease-in-out; 
+    /* 1. NEW: This transition *must* match the sidebar's 0.4s */
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    margin-left: 0; /* Default state */
+
+    /* 2. NEW: Tell the GPU to get ready */
+    will-change: transform;
 }
-/* --- END NEW STYLES --- */
+
+/* 3. NEW: This rule "pushes" the content when the sidebar is open */
+.sidebar-open .main-content {
+    transform: translateX(250px);
+}
 
 
-/* --- PAGE STYLES (Mostly Unchanged) --- */
+/* --- PAGE STYLES --- */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     margin: 0;
     padding: 0; 
     background: linear-gradient(135deg, #0d0d5b, #000020);
-    background-attachment: fixed; 
+    background-attachment: fixed;
+    /* NEW: This prevents a horizontal scrollbar during animation */
+    overflow-x: hidden;
 }
 
 .header {
@@ -170,6 +131,10 @@ h1 {
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
+
+    /* NEW: Add a fade-in animation for when the data loads */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 /* --- OPTIMIZED Individual Game Card --- */
@@ -186,6 +151,8 @@ h1 {
 
 .gameCard:hover {
     transform: translateY(-5px);
+    /* NEW: Re-adding a subtle shadow on *hover* is cheap */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
 .gameCard img {
@@ -205,9 +172,12 @@ h1 {
     text-overflow: ellipsis;
 }
 
-/* --- GO TO TOP BUTTON STYLES --- */
+/* --- GO TO TOP BUTTON STYLES (NOW WITH FADE) --- */
 #goToTopBtn {
-    display: none; 
+    /* NEW: Use opacity & visibility for fade-in/out */
+    opacity: 0;
+    visibility: hidden;
+    
     position: fixed; 
     bottom: 30px;
     right: 30px;
@@ -223,7 +193,9 @@ h1 {
     width: 50px;
     height: 50px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: background-color 0.2s;
+    
+    /* NEW: Add transitions for the fade */
+    transition: background-color 0.2s, opacity 0.3s, visibility 0.3s;
 }
 
 #goToTopBtn:hover {

@@ -1,0 +1,92 @@
+/* Basic reset */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: white;
+}
+
+.hero-container {
+    height: 100%; /* Makes it full-screen */
+    
+    /* This adds your image AND a dark overlay so text is readable */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://4kwallpapers.com/images/walls/thumbs_3t/13667.jpg');
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed; /* Keeps image still on scroll */
+
+    /* This centers your content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-content {
+    /* Glassy/modern container for the text */
+    background: rgba(0, 0, 0, 0.2);
+    padding: 40px 60px;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: #e0e0e0;
+    margin-top: 0;
+    margin-bottom: 30px;
+}
+
+/* --- Navigation Button Styles --- */
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap; /* Allows buttons to wrap on small screens */
+}
+
+.nav-button {
+    display: block;
+    padding: 12px 25px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.nav-button.active {
+    background-color: #3e3eff;
+    border-color: #3e3eff;
+}
+
+.nav-button.disabled {
+    background-color: rgba(100, 100, 100, 0.1);
+    border-color: rgba(100, 100, 100, 0.3);
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+.nav-button.disabled:hover {
+    transform: none;
+    background-color: rgba(100, 100, 100, 0.1);
+    box-shadow: none;
+}

@@ -1,3 +1,4 @@
-# ps2games
-A simple, searchable web catalog of 3,500+ PS2 games
+ALL Console Games Library
+Copyright (c) 2025, Deva Tech Services
+All Rights Reserved.
 Visit https://vivekkadamvk.github.io/games/
